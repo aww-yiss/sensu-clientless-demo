@@ -34,12 +34,15 @@ Let's walk through the main components present in this repo:
 
 
 The flow looks like this:
+
 ![Monitoring Flow](images/consul-based-monitoring.png)
 
 High-level architecture:
+
 ![Architecture](images/high-level-architecture.png)
 
 Containers and communications:
+
 ![Containers and communiations](images/containers.png)
 
 # Enough Talk... I Wanna See It!
