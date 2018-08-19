@@ -32,6 +32,7 @@ Let's walk through the main components present in this repo:
     4. Phone home the check result to Sensu's `/results` API
     5. Perform cleanup to remove any clients in Sensu that are no longer present in Consul
 
+
 The flow looks like this:
 ![Monitoring Flow](images/consul-based-monitoring.png)
 
