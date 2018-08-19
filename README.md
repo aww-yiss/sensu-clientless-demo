@@ -32,6 +32,15 @@ Let's walk through the main components present in this repo:
     4. Phone home the check result to Sensu's `/results` API
     5. Perform cleanup to remove any clients in Sensu that are no longer present in Consul
 
+The flow looks like this:
+![Monitoring Flow](images/consul-based-monitoring.png)
+
+High-level architecture:
+![Architecture](images/high-level-architecture.png)
+
+Containers and communications:
+![Containers and communiations](images/containers.png)
+
 # Enough Talk... I Wanna See It!
 
 You can get a quick demo of the capabilities by running the `./run_demo.sh` script in the root of this repo.
