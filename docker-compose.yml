@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+
+  consul:
+    image: consul
+    container_name: consul
+    hostname: consul
+    ports:
+      - '8400:8400'
+      - '8500:8500'
+      - '8600:53'
+    command: agent -server -disable-host-node-id -client=0.0.0.0 -bootstrap-expect 1 -ui --datacenter sensu-clientless-test
+
+  redis:
+    image: redis:3
+
+  sensu-api:
+    image: sstarcher/sensu
+    ports:
+      - '4567:4567'
+    command: api
+    depends_on:
+      - redis
+
+  sensu-server:
+    image: sstarcher/sensu
+    command: server
+    depends_on:
+      - redis
+
+  uchiwa:
+    image: uchiwa/uchiwa
+    ports:
+      - '3000:3000'
+    volumes:
+      - './uchiwa/config.json:/config/config.json'
+    links:
+      - sensu-api
+
+  web-node-01:
+    build: web
+    ports:
+      - '8001:80'
+    hostname: web-node-01
+    depends_on:
+      - consul
+
+  web-node-02:
+    build: web
+    ports:
+      - '8002:80'
+    hostname: web-node-02
+    depends_on:
+      - consul
+
+  web-node-03:
+    build: web
+    ports:
+      - '8003:80'
+    hostname: web-node-03
+    depends_on:
+      - consul
+
+  endpoint-monitor:
+    build: endpoint-monitor
+    environment:
+      SENSU_API: http://sensu-api:4567
+      CONSUL_API: http://consul:8500
+    depends_on:
+      - sensu-api
+
+volumes:
+  uchiwa:

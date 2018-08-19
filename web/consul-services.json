@@ -1,0 +1,15 @@
+{
+  "service": {
+    "name": "web-hello-world",
+    "tags": ["web","sensu-clientless-test"],
+    "address": "",
+    "port": 80,
+    "enable_tag_override": false,
+    "meta": {
+        "environment": "production",
+        "handler": "pagerduty",
+        "pdkey": "1234567890",
+        "uri": ""
+    }
+  }
+}
